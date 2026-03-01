@@ -2333,50 +2333,106 @@
     </footer>
 
     <script>
+        // API Configuration - Change this to your backend URL
+        const API_BASE = 'http://localhost:3000/api';
+        
         // Initialize Lucide icons
         lucide.createIcons();
 
-        // Mock Project Data
-        const projects = [
-            { 
-                id: 1, 
-                title: 'Botanical Skincare Brand', 
-                description: 'A complete visual ecosystem for a premium organic skincare line.', 
-                tags: ['Branding', 'Canva Systems'], 
-                imageUrl: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&q=80&w=1200',
-                galleryUrls: [
-                    'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&q=80&w=800',
-                    'https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&q=80&w=800'
-                ],
-                content: 'We overhauled the digital storefront to match the physical product quality. By implementing a 10-day sprint, we moved from concept to a fully realized social kit that increased engagement by 40%.'
-            },
-            { 
-                id: 2, 
-                title: 'Nexus Tech Launch', 
-                description: 'Strategic B2B positioning and LinkedIn optimization for a SaaS startup.', 
-                tags: ['B2B', 'Digital Design'], 
-                imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200',
-                galleryUrls: [],
-                content: 'Professionalism meets innovation. We created a high-converting content system that allowed the founders to scale their outreach with total brand consistency.'
-            },
-            { 
-                id: 3, 
-                title: 'The Daily Grind', 
-                description: 'Refreshing a local staple for a new generation of digital natives.', 
-                tags: ['Social Strategy', 'Content'], 
-                imageUrl: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1200',
-                galleryUrls: [
-                    'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=800'
-                ],
-                content: 'A local cafe rebrand that focused on "Digital First" touchpoints. Custom highlight covers and grid layouts turned followers into regulars.'
-            }
-        ];
-
+        // State
+        let projects = [];
+        let logo = null;
         let currentView = 'landing';
         let currentProject = null;
         let adminView = 'projects_list';
         let editingProject = null;
         let formData = { title: '', description: '', content: '', tags: '', imageUrl: '', galleryUrls: [] };
+
+        // API Helper
+        async function apiCall(endpoint, options = {}) {
+            try {
+                const response = await fetch(`${API_BASE}${endpoint}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...options.headers
+                    },
+                    ...options
+                });
+                const result = await response.json();
+                if (!result.success) {
+                    console.error('API Error:', result.message);
+                    alert(result.message || 'An error occurred');
+                    return null;
+                }
+                return result.data;
+            } catch (error) {
+                console.error('Network Error:', error);
+                alert('Unable to connect to server. Make sure the backend is running.');
+                return null;
+            }
+        }
+
+        // Load initial data
+        async function loadData() {
+            const projectsData = await apiCall('/projects');
+            if (projectsData) {
+                projects = projectsData;
+            }
+            
+            const logoData = await apiCall('/logo');
+            if (logoData) {
+                logo = logoData;
+            }
+            
+            renderFeaturedWorks();
+            renderPortfolio();
+            renderAdminContent();
+        }
+
+        // Render functions
+        function renderFeaturedWorks() {
+            const grid = document.querySelector('#landing-view .project-grid');
+            if (!grid) return;
+            
+            grid.innerHTML = projects.slice(0, 3).map((p, idx) => `
+                <div class="project-card ${idx === 1 ? 'offset' : ''}" onclick="viewProjectById(${p.id})">
+                    <div class="project-img">
+                        <img src="${p.imageUrl}" alt="${p.title}">
+                        <div class="project-img-overlay"></div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-tag">${p.tags[0] || 'Project'}</span>
+                        <h3>${p.title}</h3>
+                        <div class="divider"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPortfolio() {
+            const grid = document.querySelector('#portfolio-view .portfolio-grid');
+            if (!grid) return;
+            
+            grid.innerHTML = projects.map((p, index) => `
+                <div class="portfolio-item" onclick="viewProjectById(${p.id})">
+                    <div class="portfolio-img">
+                        <img src="${p.imageUrl}" alt="${p.title}">
+                        <div class="portfolio-img-overlay"></div>
+                        <div class="portfolio-arrow">
+                            <div class="portfolio-arrow-btn">
+                                <i data-lucide="arrow-right" style="width:28px;height:28px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item-info">
+                        <span class="portfolio-item-label">0${index + 1} // ${p.tags.join(' & ')}</span>
+                        <h3>${p.title}</h3>
+                    </div>
+                </div>
+            `).join('');
+            
+            lucide.createIcons();
+        }
 
         // Navigation
         function setView(view) {
@@ -2399,8 +2455,10 @@
         }
 
         // Project Detail
-        function viewProject(index) {
-            currentProject = projects[index];
+        function viewProjectById(id) {
+            currentProject = projects.find(p => p.id === id);
+            if (!currentProject) return;
+            
             document.getElementById('project-title').textContent = currentProject.title;
             document.getElementById('project-desc').textContent = currentProject.description;
             document.getElementById('project-content').textContent = currentProject.content;
@@ -2425,10 +2483,30 @@
             setView('project');
         }
 
+        // Alias for backward compatibility
+        function viewProject(index) {
+            if (projects[index]) {
+                viewProjectById(projects[index].id);
+            }
+        }
+
         // Form Submit
-        function handleSubmit(e) {
+        async function handleSubmit(e) {
             e.preventDefault();
-            alert('Sent!');
+            const form = e.target;
+            const name = form.querySelector('input[type="text"]').value;
+            const email = form.querySelector('input[type="email"]').value;
+            const message = form.querySelector('textarea').value;
+
+            const data = await apiCall('/contact', {
+                method: 'POST',
+                body: JSON.stringify({ name, email, message })
+            });
+
+            if (data) {
+                alert('Thank you for your inquiry! We will get back to you soon.');
+                form.reset();
+            }
         }
 
         // Admin Functions
@@ -2473,7 +2551,7 @@
                                 </div>
                                 <div class="admin-project-info">
                                     <h4>${p.title}</h4>
-                                    <p>${p.tags[0]}</p>
+                                    <p>${p.tags[0] || ''}</p>
                                 </div>
                             </div>
                         `).join('')}
@@ -2506,30 +2584,18 @@
                                 </div>
                                 <div class="admin-form-group">
                                     <label class="admin-form-label">Main Visual URL</label>
-                                    <input type="text" class="admin-form-input" value="${formData.imageUrl || ''}" onchange="formData.imageUrl = this.value" required>
+                                    <input type="text" class="admin-form-input" value="${formData.imageUrl || ''}" onchange="formData.imageUrl = this.value" required placeholder="https://...">
                                 </div>
                                 <div class="admin-form-group">
-                                    <label class="admin-form-label">Extended Assets</label>
+                                    <label class="admin-form-label">Upload Image</label>
                                     <div class="admin-gallery-upload">
-                                        <input type="file" multiple onchange="handleGalleryUpload(event)">
+                                        <input type="file" accept="image/*" onchange="uploadProjectImage(event)">
                                         <div class="admin-gallery-upload-btn">
-                                            <i data-lucide="plus" style="width:24px;height:24px;"></i> Add Gallery
+                                            <i data-lucide="upload" style="width:24px;height:24px;"></i> Upload Image
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            ${formData.galleryUrls.length > 0 ? `
-                                <div class="admin-gallery-preview">
-                                    ${formData.galleryUrls.map((u, i) => `
-                                        <div class="gallery-preview-item">
-                                            <img src="${u}" alt="">
-                                            <div class="gallery-preview-remove" onclick="removeGalleryImage(${i})">
-                                                <i data-lucide="x" style="width:24px;height:24px;color:white;"></i>
-                                            </div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            ` : ''}
                             <div class="admin-form-actions">
                                 <button type="submit" class="admin-form-submit">Compile Changes</button>
                                 <button type="button" class="admin-form-cancel" onclick="setAdminView('projects_list')">Cancel</button>
@@ -2556,39 +2622,76 @@
         function editProject(id) {
             const project = projects.find(p => p.id === id);
             editingProject = project;
-            formData = { ...project, tags: project.tags.join(', ') };
+            formData = { ...project, tags: Array.isArray(project.tags) ? project.tags.join(', ') : project.tags };
             setAdminView('project_form');
         }
 
-        function deleteProject(id) {
-            if (confirm('Delete?')) {
-                const index = projects.findIndex(p => p.id === id);
-                if (index > -1) {
-                    projects.splice(index, 1);
-                    renderAdminContent();
-                }
+        async function deleteProject(id) {
+            if (!confirm('Delete this project?')) return;
+            
+            const result = await apiCall(`/projects/${id}`, { method: 'DELETE' });
+            if (result !== null) {
+                projects = projects.filter(p => p.id !== id);
+                renderFeaturedWorks();
+                renderPortfolio();
+                renderAdminContent();
             }
         }
 
-        function saveProject(e) {
+        async function saveProject(e) {
             e.preventDefault();
-            const p = { 
-                ...formData, 
-                id: editingProject ? editingProject.id : Date.now(), 
+            
+            const projectData = {
+                title: formData.title,
+                description: formData.description,
+                content: formData.content,
                 tags: typeof formData.tags === 'string' ? formData.tags.split(',').map(t => t.trim()) : formData.tags,
-                galleryUrls: formData.galleryUrls
+                imageUrl: formData.imageUrl,
+                galleryUrls: formData.galleryUrls || []
             };
-            
+
+            let result;
             if (editingProject) {
-                const index = projects.findIndex(x => x.id === editingProject.id);
-                projects[index] = p;
+                result = await apiCall(`/projects/${editingProject.id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify(projectData)
+                });
             } else {
-                projects.unshift(p);
+                result = await apiCall('/projects', {
+                    method: 'POST',
+                    body: JSON.stringify(projectData)
+                });
             }
-            
-            setAdminView('projects_list');
-            editingProject = null;
-            formData = { title: '', description: '', content: '', tags: '', imageUrl: '', galleryUrls: [] };
+
+            if (result) {
+                await loadData();
+                setAdminView('projects_list');
+                editingProject = null;
+                formData = { title: '', description: '', content: '', tags: '', imageUrl: '', galleryUrls: [] };
+            }
+        }
+
+        async function uploadProjectImage(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const formDataUpload = new FormData();
+            formDataUpload.append('image', file);
+
+            try {
+                const response = await fetch(`${API_BASE}/projects/upload`, {
+                    method: 'POST',
+                    body: formDataUpload
+                });
+                const result = await response.json();
+                if (result.success) {
+                    formData.imageUrl = result.data.url;
+                    alert('Image uploaded successfully!');
+                }
+            } catch (error) {
+                console.error('Upload error:', error);
+                alert('Failed to upload image');
+            }
         }
 
         function handleGalleryUpload(e) {
@@ -2596,7 +2699,7 @@
             files.forEach(file => {
                 const reader = new FileReader();
                 reader.onload = (ev) => {
-                    formData.galleryUrls = [...formData.galleryUrls, ev.target.result];
+                    formData.galleryUrls = [...(formData.galleryUrls || []), ev.target.result];
                     renderAdminContent();
                 };
                 reader.readAsDataURL(file);
@@ -2608,12 +2711,29 @@
             renderAdminContent();
         }
 
-        function handleLogoUpload(e) {
-            alert('Logo uploaded! (SVG files require server-side handling)');
+        async function handleLogoUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const formDataUpload = new FormData();
+            formDataUpload.append('logo', file);
+
+            try {
+                const response = await fetch(`${API_BASE}/logo`, {
+                    method: 'POST',
+                    body: formDataUpload
+                });
+                const result = await response.json();
+                if (result.success) {
+                    logo = result.data.url;
+                    alert('Logo uploaded successfully!');
+                }
+            } catch (error) {
+                console.error('Upload error:', error);
+                alert('Failed to upload logo. Only SVG files are allowed.');
+            }
         }
 
-        // Initial render
-        renderAdminContent();
+        // Initialize
+        loadData();
     </script>
-</body>
-</html>
