@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Petra Digital | Full Service Branding, Web & Management</title>
+    <title>Petra Digital | Structural Brand Systems</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --bg-white: #FFFFFF;
-            --text-primary: #1A1A1A;
-            --text-secondary: #4A4A4A;
-            --accent-orange: #FF6B35;
-            --accent-hover: #E85A2A;
-            --card-border: #E5E5E5;
-            --section-bg: #FAFAFA;
+            --accent: #E35335;
+            --accent-dark: #C9472B;
+            --dark: #24343B;
+            --dark-light: #3D5A66;
+            --bg-cream: #FFFDFB;
+            --bg-offwhite: #FAFAFA;
         }
 
         * {
@@ -30,479 +30,1950 @@
 
         body {
             font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-white);
-            color: var(--text-primary);
+            background: var(--bg-cream);
+            color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Header */
-        header {
+        /* Grid Background */
+        .grid-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 15v30L30 60 0 45V15z' fill='none' stroke='%23E35335' stroke-width='0.5' stroke-opacity='0.05'/%3E%3C/svg%3E");
+            background-size: 60px 60px;
+        }
+
+        /* Selection */
+        ::selection {
+            background: rgba(227, 83, 53, 0.1);
+            color: var(--accent);
+        }
+
+        /* Navbar */
+        .navbar {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: var(--bg-white);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 1000;
-            padding: 16px 5%;
+            width: 95%;
+            max-width: 72rem;
         }
 
-        nav {
+        .navbar-inner {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 24px;
+            padding: 20px 32px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
+            justify-content: space-between;
+            box-shadow: 0 8px 32px rgba(227, 83, 53, 0.05);
         }
 
-        .logo {
-            font-size: 24px;
+        .logo-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--text-primary);
-            text-decoration: none;
+            letter-spacing: -0.02em;
+            color: var(--dark);
         }
 
-        .logo span {
-            color: var(--accent-orange);
+        .logo-text span {
+            color: var(--accent);
         }
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 32px;
-            list-style: none;
+            gap: 48px;
         }
 
-        .nav-links a {
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(36, 52, 59, 0.6);
             text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-orange);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            background: var(--accent-orange);
-            color: var(--bg-white);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            position: relative;
+            padding: 4px 0;
+            transition: color 0.3s;
+            background: none;
             border: none;
             cursor: pointer;
+            font-family: inherit;
         }
 
-        .btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent);
         }
 
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-        }
-
-        .mobile-menu span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-primary);
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 4px;
+            background: var(--accent);
             border-radius: 2px;
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 16px;
+        }
+
+        .btn-primary {
+            padding: 14px 32px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 14px rgba(227, 83, 53, 0.1);
+            font-family: inherit;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            box-shadow: 0 8px 24px rgba(227, 83, 53, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            padding: 14px 32px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--dark);
+            border-radius: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .admin-btn {
+            padding: 12px;
+            color: rgba(36, 52, 59, 0.3);
+            background: #F9FAFB;
+            border: 1px solid #F3F4F6;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .admin-btn:hover {
+            color: var(--dark);
+        }
+
+        /* Main Content */
+        main {
+            min-height: 100vh;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Landing View */
+        .landing-view {
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Hero Section */
         .hero {
-            padding: 140px 5% 100px;
-            max-width: 1400px;
+            padding: 180px 32px 128px;
+            max-width: 80rem;
             margin: 0 auto;
+            text-align: center;
+            position: relative;
         }
 
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
+        .hero-decor-1 {
+            position: absolute;
+            top: 140px;
+            left: 40px;
+            opacity: 0.1;
+            transform: rotate(12deg);
+            display: none;
+        }
+
+        .hero-decor-2 {
+            position: absolute;
+            top: 200px;
+            right: 40px;
+            opacity: 0.1;
+            transform: rotate(-12deg);
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-decor-1, .hero-decor-2 {
+                display: block;
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
             align-items: center;
+            gap: 12px;
+            padding: 10px 24px;
+            border-radius: 9999px;
+            background: white;
+            border: 1px solid rgba(227, 83, 53, 0.2);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 48px;
+            animation: slideInTop 0.7s ease;
         }
 
-        .hero-text h1 {
-            font-size: 56px;
-            font-weight: 700;
+        @keyframes slideInTop {
+            from { opacity: 0; transform: translateY(-16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--dark);
             line-height: 1.1;
-            margin-bottom: 24px;
-            color: var(--text-primary);
+            margin-bottom: 48px;
         }
 
-        .hero-text p {
-            font-size: 20px;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 4.5rem;
+            }
         }
 
-        .hero-image {
-            position: relative;
+        @media (min-width: 1024px) {
+            .hero h1 {
+                font-size: 5.5rem;
+            }
         }
 
-        .hero-image img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            border-radius: 24px;
+        .hero h1 span {
+            color: var(--accent);
+            font-style: italic;
         }
 
-        .floating-badge {
-            position: absolute;
-            bottom: -20px;
-            left: -30px;
-            background: var(--accent-orange);
-            color: var(--bg-white);
-            padding: 16px 28px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 15px;
-            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.35);
-            animation: float 3s ease-in-out infinite;
+        .hero p {
+            font-size: 1.25rem;
+            color: rgba(36, 52, 59, 0.6);
+            max-width: 42rem;
+            margin: 0 auto 64px;
+            font-weight: 500;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        @media (min-width: 768px) {
+            .hero p {
+                font-size: 1.5rem;
+            }
         }
 
-        /* About Section */
-        .about {
-            padding: 100px 5%;
-            background: var(--section-bg);
+        .hero p span {
+            color: var(--dark);
+            font-weight: 700;
         }
 
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            max-width: 1400px;
-            margin: 0 auto;
+        .hero-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
             align-items: center;
         }
 
-        .about-image-wrapper {
-            position: relative;
+        @media (min-width: 640px) {
+            .hero-btns {
+                flex-direction: row;
+                justify-content: center;
+            }
         }
 
-        .about-image {
-            width: 100%;
-            height: 450px;
-            object-fit: cover;
+        .hero-btns .btn-primary {
+            padding: 28px 56px;
+            font-size: 1.125rem;
             border-radius: 24px;
-        }
-
-        .orange-l-shape {
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            width: 100px;
-            height: 100px;
-            border-top: 6px solid var(--accent-orange);
-            border-left: 6px solid var(--accent-orange);
-            border-radius: 24px 0 0 0;
-            z-index: -1;
-        }
-
-        .experience-card {
-            position: absolute;
-            bottom: -30px;
-            right: -20px;
-            background: var(--accent-orange);
-            color: var(--bg-white);
-            padding: 20px 32px;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.35);
-        }
-
-        .experience-card span {
-            font-size: 32px;
-            font-weight: 700;
-            display: block;
-        }
-
-        .experience-card p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        .about-text h2 {
-            font-size: 42px;
-            font-weight: 600;
-            margin-bottom: 24px;
-            color: var(--text-primary);
-        }
-
-        .about-text > p {
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-        }
-
-        .values-list {
-            list-style: none;
-        }
-
-        .values-list li {
             display: flex;
             align-items: center;
             gap: 16px;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--card-border);
         }
 
-        .values-list li:last-child {
-            border-bottom: none;
+        .hero-btns .btn-primary:hover svg {
+            transform: translateX(4px);
         }
 
-        .value-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(255, 107, 53, 0.1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-orange);
-            font-weight: 700;
-            font-size: 20px;
+        .hero-btns .btn-secondary {
+            padding: 28px 56px;
+            font-size: 1.125rem;
+            border-radius: 24px;
         }
 
-        .value-text h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 4px;
+        /* Background Decor */
+        .bg-decor {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
         }
 
-        .value-text p {
-            font-size: 14px;
-            color: var(--text-secondary);
+        .bg-decor-1 {
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            width: 40vw;
+            height: 40vw;
+            background: rgba(227, 83, 53, 0.03);
+            border-radius: 50%;
+            filter: blur(120px);
+            animation: pulse 4s ease-in-out infinite;
         }
 
-        /* Services Section */
-        .services {
-            padding: 100px 5%;
-            max-width: 1400px;
+        .bg-decor-2 {
+            position: absolute;
+            bottom: 10%;
+            right: 5%;
+            width: 30vw;
+            height: 30vw;
+            background: rgba(249, 115, 22, 0.05);
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: pulse 4s ease-in-out infinite 2s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Featured Works */
+        .featured-works {
+            padding: 128px 32px;
+            max-width: 80rem;
             margin: 0 auto;
+            border-top: 1px solid rgba(227, 83, 53, 0.05);
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
         }
 
-        .services h2 {
-            font-size: 42px;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            md: flex-row;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 96px;
             gap: 24px;
         }
 
-        .service-card {
-            background: var(--bg-white);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 32px;
-            transition: all 0.3s ease;
+        @media (min-width: 768px) {
+            .section-header {
+                flex-direction: row;
+            }
         }
 
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+        .section-header-left {
+            max-width: 28rem;
         }
 
-        .service-card.featured {
-            background: var(--accent-orange);
-            color: var(--bg-white);
+        .section-header h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+            margin-bottom: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .section-header h2 {
+                font-size: 3rem;
+            }
+        }
+
+        .section-header h2 span {
+            color: var(--accent);
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: rgba(36, 52, 59, 0.6);
+            font-weight: 500;
+        }
+
+        .see-all-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--dark);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(227, 83, 53, 0.2);
+            transition: all 0.3s;
+        }
+
+        .see-all-btn:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Project Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .project-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .project-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 40px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            cursor: pointer;
+            transition: all 0.5s;
+        }
+
+        .project-card:hover {
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+            transform: translateY(-12px);
+        }
+
+        .project-card.offset {
+            margin-top: 0;
+        }
+
+        @media (min-width: 768px) {
+            .project-card.offset {
+                margin-top: 48px;
+            }
+        }
+
+        .project-img {
+            aspect-ratio: 4/5;
+            background: #F9FAFB;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #F3F4F6;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: all 1s ease;
+        }
+
+        .project-card:hover .project-img img {
+            filter: grayscale(0%);
+        }
+
+        .project-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 1;
+        }
+
+        .project-card:hover .project-img-overlay {
+            opacity: 1;
+        }
+
+        .project-info {
+            padding: 32px 8px 8px;
+        }
+
+        .project-tag {
+            font-size: 0.625rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .project-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 16px;
+            line-height: 1.2;
+            transition: color 0.3s;
+        }
+
+        .project-card:hover .project-info h3 {
+            color: var(--accent);
+        }
+
+        .project-info .divider {
+            width: 100%;
+            height: 1px;
+            background: #F3F4F6;
+            transition: background 0.3s;
+        }
+
+        .project-card:hover .project-info .divider {
+            background: rgba(227, 83, 53, 0.2);
+        }
+
+        /* Timeline Section */
+        .timeline {
+            padding: 128px 32px;
+            max-width: 64rem;
+            margin: 0 auto;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 96px;
+        }
+
+        .timeline-header h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .timeline-header h2 {
+                font-size: 3rem;
+            }
+        }
+
+        .timeline-header p {
+            font-size: 1.25rem;
+            color: rgba(36, 52, 59, 0.5);
+            max-width: 32rem;
+            margin: 0 auto;
+        }
+
+        .timeline-items {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            gap: 48px;
+        }
+
+        .timeline-item {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .timeline-item {
+                flex-direction: row;
+            }
+        }
+
+        .timeline-day {
+            width: 128px;
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.02em;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+            .timeline-day {
+                text-align: right;
+            }
+        }
+
+        .timeline-line {
+            height: 1px;
+            width: 100%;
+            background: rgba(227, 83, 53, 0.2);
+            transition: width 0.7s;
+        }
+
+        @media (min-width: 768px) {
+            .timeline-line {
+                width: 96px;
+            }
+        }
+
+        .timeline-item:hover .timeline-line {
+            width: 128px;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: all 0.5s;
+        }
+
+        .timeline-item:hover .timeline-content {
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+        }
+
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .timeline-content p {
+            font-size: 1.125rem;
+            color: rgba(36, 52, 59, 0.6);
+            font-weight: 500;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 128px 32px;
+            max-width: 80rem;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(24px);
+            padding: 48px;
+            border-radius: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            display: flex;
+            flex-direction: column;
             align-items: center;
             text-align: center;
+            transition: all 0.5s;
         }
 
-        .service-card.featured h3 {
-            font-size: 28px;
+        .stat-card:hover {
+            border-color: rgba(227, 83, 53, 0.3);
+            transform: translateY(-8px);
+        }
+
+        .stat-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 32px;
+            background: rgba(227, 83, 53, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            margin-bottom: 32px;
+            transition: all 0.5s;
+        }
+
+        .stat-card:hover .stat-icon {
+            background: var(--accent);
+            color: white;
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(36, 52, 59, 0.4);
         }
 
-        .service-card.featured p {
-            opacity: 0.9;
-            margin-top: 8px;
-        }
-
-        .service-card:not(.featured) h3 {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: var(--text-primary);
-        }
-
-        .pricing-item {
-            padding: 16px 0;
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        .pricing-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .pricing-item h4 {
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
-        }
-
-        .pricing-item .price {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--accent-orange);
-        }
-
-        .service-card:not(.featured) .pricing-item .price {
-            color: var(--accent-orange);
-        }
-
-        /* Portfolio Section */
-        .portfolio {
-            padding: 100px 5%;
-            background: var(--section-bg);
-        }
-
-        .portfolio h2 {
-            font-size: 42px;
-            font-weight: 600;
+        /* CTA Section */
+        .cta-section {
+            padding: 128px 32px;
+            max-width: 72rem;
+            margin: 0 auto;
             text-align: center;
-            margin-bottom: 60px;
+            background: var(--dark);
+            border-radius: 64px;
+            margin-top: 96px;
+            margin-bottom: 96px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-decor {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 500px;
+            height: 500px;
+            background: rgba(227, 83, 53, 0.1);
+            border-radius: 50%;
+            filter: blur(100px);
+            transform: translate(50%, -50%);
+            z-index: 0;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .cta-section h2 {
+                font-size: 4.5rem;
+            }
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 32rem;
+            margin: 0 auto 64px;
+        }
+
+        .cta-section .btn-primary {
+            padding: 32px 64px;
+            font-size: 1.25rem;
+            border-radius: 24px;
+        }
+
+        /* Portfolio Page */
+        .portfolio-view {
+            padding: 180px 32px 128px;
+            max-width: 80rem;
+            margin: 0 auto;
+            animation: fadeIn 1s ease;
+        }
+
+        .portfolio-header {
+            margin-bottom: 128px;
+        }
+
+        .portfolio-label {
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .portfolio-title {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: var(--dark);
+            margin-bottom: 48px;
+            line-height: 1;
+        }
+
+        @media (min-width: 768px) {
+            .portfolio-title {
+                font-size: 6rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .portfolio-title {
+                font-size: 7rem;
+            }
+        }
+
+        .portfolio-title span {
+            color: var(--accent);
+        }
+
+        .portfolio-desc {
+            font-size: 1.5rem;
+            color: rgba(36, 52, 59, 0.5);
+            font-weight: 500;
+            max-width: 32rem;
+            line-height: 1.5;
         }
 
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            max-width: 1400px;
-            margin: 0 auto;
+            grid-template-columns: 1fr;
+            gap: 48px 48px;
         }
 
-        .project-card {
-            background: var(--bg-white);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.3s ease;
+        @media (min-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .portfolio-item {
             cursor: pointer;
         }
 
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+        .portfolio-img {
+            aspect-ratio: 1;
+            background: #F9FAFB;
+            border-radius: 56px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.1);
+            border: 1px solid #F3F4F6;
+            margin-bottom: 40px;
         }
 
-        .project-image {
+        .portfolio-img img {
             width: 100%;
-            height: 280px;
+            height: 100%;
+            object-fit: cover;
+            transition: all 1s ease;
+        }
+
+        .portfolio-item:hover .portfolio-img img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(36, 52, 59, 0.05);
+            transition: background 0.7s;
+            z-index: 1;
+        }
+
+        .portfolio-item:hover .portfolio-img-overlay {
+            background: transparent;
+        }
+
+        .portfolio-arrow {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            z-index: 2;
+        }
+
+        .portfolio-arrow-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 24px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+            transform: scale(1);
+            transition: transform 0.3s;
+        }
+
+        .portfolio-item:hover .portfolio-arrow-btn {
+            transform: scale(1.1);
+        }
+
+        .portfolio-item-info {
+            padding: 0 32px;
+        }
+
+        .portfolio-item-label {
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .portfolio-item h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            transition: color 0.3s;
+        }
+
+        .portfolio-item:hover h3 {
+            color: var(--accent);
+        }
+
+        /* Project Detail View */
+        .project-view {
+            padding: 192px 32px 0;
+            animation: fadeIn 1s ease;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: rgba(36, 52, 59, 0.3);
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 80px;
+            transition: color 0.3s;
+            font-family: inherit;
+        }
+
+        .back-btn:hover {
+            color: var(--accent);
+        }
+
+        .back-btn:hover svg {
+            transform: translateX(-8px);
+        }
+
+        .project-header {
+            max-width: 80rem;
+            margin: 0 auto 96px;
+        }
+
+        .project-header-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            align-items: end;
+        }
+
+        @media (min-width: 768px) {
+            .project-header-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .project-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: -0.03em;
+            line-height: 0.95;
+        }
+
+        @media (min-width: 768px) {
+            .project-title {
+                font-size: 5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .project-title {
+                font-size: 6rem;
+            }
+        }
+
+        .project-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .project-tag-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            background: rgba(227, 83, 53, 0.05);
+            padding: 10px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(227, 83, 53, 0.1);
+        }
+
+        .project-quote {
+            font-size: 1.25rem;
+            color: rgba(36, 52, 59, 0.5);
+            font-style: italic;
+            border-left: 4px solid var(--accent);
+            padding-left: 32px;
+        }
+
+        .project-hero-img {
+            width: 100%;
+            height: 70vh;
+            background: #F9FAFB;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-hero-img img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
 
-        .project-info {
+        .project-content {
+            padding: 128px 32px;
+            max-width: 56rem;
+            margin: 0 auto;
+        }
+
+        .project-content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 96px;
+        }
+
+        @media (min-width: 768px) {
+            .project-content-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .content-block h4 {
+            font-size: 0.875rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: var(--accent);
+            margin-bottom: 40px;
+        }
+
+        .content-block h4.dark {
+            color: rgba(36, 52, 59, 0.1);
+        }
+
+        .content-block p {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--dark);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .content-block-desc {
+            font-size: 1.25rem;
+            color: rgba(36, 52, 59, 0.6);
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+
+        .project-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            margin-top: 128px;
+        }
+
+        @media (min-width: 768px) {
+            .project-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .gallery-item {
+            border-radius: 64px;
+            overflow: hidden;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.1);
+            border: 1px solid #F3F4F6;
+        }
+
+        .gallery-item.full {
+            grid-column: 1 / -1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-cta {
+            padding: 192px 32px;
+            background: var(--dark);
+            text-align: center;
+        }
+
+        .project-cta h3 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 64px;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .project-cta h3 {
+                font-size: 5rem;
+            }
+        }
+
+        .project-cta h3 span {
+            color: var(--accent);
+        }
+
+        .project-cta .btn-primary {
+            padding: 32px 64px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            border-radius: 24px;
+        }
+
+        /* Contact Page */
+        .contact-view {
+            padding: 180px 32px 128px;
+            max-width: 64rem;
+            margin: 0 auto;
+            animation: fadeIn 1s ease;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 128px;
+        }
+
+        .contact-label {
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            margin-bottom: 32px;
+            display: block;
+        }
+
+        .contact-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: -0.03em;
+            margin-bottom: 40px;
+            line-height: 1;
+        }
+
+        @media (min-width: 768px) {
+            .contact-title {
+                font-size: 5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .contact-title {
+                font-size: 6rem;
+            }
+        }
+
+        .contact-title span {
+            color: var(--accent);
+        }
+
+        .contact-desc {
+            font-size: 1.5rem;
+            color: rgba(36, 52, 59, 0.4);
+            max-width: 32rem;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 48px;
+            border-radius: 64px;
+            border: 1px solid rgba(227, 83, 53, 0.1);
+            box-shadow: 0 32px 120px rgba(227, 83, 53, 0.06);
+        }
+
+        @media (min-width: 768px) {
+            .contact-form {
+                padding: 96px;
+            }
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 80px;
+            margin-bottom: 80px;
+        }
+
+        @media (min-width: 768px) {
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: rgba(36, 52, 59, 0.3);
+        }
+
+        .form-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #F3F4F6;
+            padding: 24px 0;
+            outline: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: inherit;
+            color: var(--dark);
+            transition: border-color 0.3s;
+        }
+
+        .form-input::placeholder {
+            color: #F3F4F6;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent);
+        }
+
+        textarea.form-input {
+            resize: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 36px;
+            background: var(--dark);
+            color: white;
+            border: none;
+            border-radius: 48px;
+            font-size: 0.875rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent);
+        }
+
+        .submit-btn:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Admin View */
+        .admin-view {
+            padding: 180px 32px 128px;
+            max-width: 80rem;
+            margin: 0 auto;
+            display: flex;
+            gap: 64px;
+            animation: fadeIn 0.7s ease;
+        }
+
+        .admin-sidebar {
+            width: 96px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            position: sticky;
+            top: 192px;
+        }
+
+        .admin-sidebar-btn {
+            padding: 28px;
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid #F3F4F6;
+            background: white;
+            color: rgba(36, 52, 59, 0.2);
+        }
+
+        .admin-sidebar-btn:hover {
+            color: var(--accent);
+        }
+
+        .admin-sidebar-btn.active {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 8px 24px rgba(227, 83, 53, 0.3);
+        }
+
+        .admin-content {
+            flex: 1;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 48px;
+            border-radius: 56px;
+            border: 1px solid rgba(227, 83, 53, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            margin-bottom: 64px;
+        }
+
+        .admin-header h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+        }
+
+        .admin-header p {
+            font-size: 0.625rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: rgba(36, 52, 59, 0.3);
+            margin-top: 12px;
+        }
+
+        .admin-add-btn {
+            padding: 20px 40px;
+            background: var(--dark);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .admin-add-btn:hover {
+            background: var(--accent);
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .admin-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .admin-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .admin-project-card {
+            background: white;
+            border-radius: 48px;
+            border: 1px solid #F3F4F6;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: all 0.5s;
+        }
+
+        .admin-project-card:hover {
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
+        }
+
+        .admin-project-img {
+            aspect-ratio: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .admin-project-actions {
+            position: absolute;
+            inset: 0;
+            background: rgba(36, 52, 59, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            backdrop-filter: blur(4px);
+        }
+
+        .admin-project-card:hover .admin-project-actions {
+            opacity: 1;
+        }
+
+        .admin-action-btn {
             padding: 20px;
+            background: white;
+            border-radius: 16px;
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .project-info h3 {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text-primary);
+        .admin-action-btn:hover {
+            color: var(--accent);
         }
 
-        .project-info p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-top: 4px;
+        .admin-action-btn.delete:hover {
+            color: #DC2626;
+        }
+
+        .admin-project-info {
+            padding: 40px;
+        }
+
+        .admin-project-info h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .admin-project-info p {
+            font-size: 0.625rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(36, 52, 59, 0.3);
+            margin-top: 12px;
+        }
+
+        /* Admin Form */
+        .admin-form {
+            background: white;
+            padding: 80px;
+            border-radius: 72px;
+            border: 1px solid #F3F4F6;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.08);
+            animation: slideInRight 0.5s ease;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(32px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .admin-form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 80px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .admin-form-header h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+        }
+
+        .admin-form-discard {
+            font-size: 0.625rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: rgba(36, 52, 59, 0.3);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s;
+            font-family: inherit;
+        }
+
+        .admin-form-discard:hover {
+            color: var(--accent);
+        }
+
+        .admin-form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 64px;
+        }
+
+        @media (min-width: 768px) {
+            .admin-form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .admin-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .admin-form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .admin-form-label {
+            font-size: 0.625rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: rgba(36, 52, 59, 0.3);
+        }
+
+        .admin-form-input {
+            width: 100%;
+            background: rgba(249, 250, 251, 0.5);
+            padding: 32px;
+            border-radius: 24px;
+            outline: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: inherit;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+
+        .admin-form-input:focus {
+            box-shadow: 0 0 0 4px rgba(227, 83, 53, 0.05);
+            border: 1px solid var(--accent);
+        }
+
+        .admin-form-input::placeholder {
+            color: #F3F4F6;
+        }
+
+        textarea.admin-form-input {
+            resize: none;
+        }
+
+        .admin-gallery-upload {
+            position: relative;
+        }
+
+        .admin-gallery-upload input {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .admin-gallery-upload-btn {
+            width: 100%;
+            background: rgba(249, 250, 251, 0.5);
+            border: 2px dashed #E5E7EB;
+            padding: 32px;
+            border-radius: 24px;
+            font-weight: 800;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: rgba(36, 52, 59, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            transition: all 0.3s;
+        }
+
+        .admin-gallery-upload-btn:hover {
+            border-color: var(--accent);
+            background: rgba(227, 83, 53, 0.05);
+            color: var(--accent);
+        }
+
+        .admin-gallery-preview {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .admin-gallery-preview {
+                grid-template-columns: repeat(8, 1fr);
+            }
+        }
+
+        .gallery-preview-item {
+            aspect-ratio: 1;
+            border-radius: 24px;
+            background: #F9FAFB;
+            border: 1px solid #F3F4F6;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .gallery-preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-preview-remove {
+            position: absolute;
+            inset: 0;
+            background: rgba(220, 38, 38, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-preview-item:hover .gallery-preview-remove {
+            opacity: 1;
+        }
+
+        .admin-form-actions {
+            display: flex;
+            gap: 40px;
+            margin-top: 64px;
+            padding-top: 64px;
+            border-top: 1px solid #F3F4F6;
+        }
+
+        .admin-form-submit {
+            flex: 1;
+            padding: 36px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 48px;
+            font-size: 0.875rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(227, 83, 53, 0.2);
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .admin-form-submit:hover {
+            background: var(--accent-dark);
+        }
+
+        .admin-form-cancel {
+            padding: 36px 96px;
+            background: #F9FAFB;
+            border: 1px solid #F3F4F6;
+            border-radius: 48px;
+            font-size: 0.875rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .admin-form-cancel:hover {
+            background: white;
+        }
+
+        /* Logo Upload */
+        .logo-upload {
+            background: white;
+            padding: 96px;
+            border-radius: 80px;
+            border: 1px solid rgba(227, 83, 53, 0.1);
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo-upload h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+            margin-bottom: 80px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid #F9FAFB;
+        }
+
+        .logo-upload-area {
+            padding: 128px;
+            border: 4px dashed #E5E7EB;
+            border-radius: 64px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: #FFFDFB;
+            transition: all 0.7s;
+        }
+
+        .logo-upload-area:hover {
+            border-color: var(--accent);
+            background: rgba(227, 83, 53, 0.05);
+        }
+
+        .logo-upload-area input {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .logo-upload-area svg {
+            color: #E5E7EB;
+            margin-bottom: 48px;
+            transition: color 0.3s;
+        }
+
+        .logo-upload-area:hover svg {
+            color: var(--accent);
+        }
+
+        .logo-upload-area p {
+            font-weight: 800;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: rgba(36, 52, 59, 0.4);
+        }
+
+        .logo-upload-success {
+            margin-top: 40px;
+            font-size: 0.875rem;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: 0.2em;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
         }
 
         /* Footer */
         footer {
-            padding: 60px 5% 30px;
-            background: var(--text-primary);
-            color: var(--bg-white);
+            padding: 96px 32px;
+            background: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(227, 83, 53, 0.05);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 60px;
-            max-width: 1400px;
+            max-width: 80rem;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            md: flex-row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
         }
 
-        .footer-brand .logo {
-            color: var(--bg-white);
-            font-size: 28px;
-            display: inline-block;
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+            }
+        }
+
+        .footer-brand {
+            text-align: left;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             margin-bottom: 16px;
         }
 
-        .footer-brand p {
-            color: rgba(255,255,255,0.7);
-            font-size: 15px;
-            line-height: 1.7;
+        .footer-logo-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
         }
 
-        .footer-column h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 20px;
+        .footer-logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--dark);
         }
 
-        .footer-column ul {
-            list-style: none;
+        .footer-tagline {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: rgba(36, 52, 59, 0.3);
         }
 
-        .footer-column ul li {
-            margin-bottom: 12px;
+        .footer-links {
+            display: flex;
+            gap: 40px;
+            font-size: 0.625rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: rgba(36, 52, 59, 0.2);
         }
 
-        .footer-column ul li a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            font-size: 15px;
-            transition: color 0.3s ease;
+        .footer-links button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            color: inherit;
+            transition: color 0.3s;
         }
 
-        .footer-column ul li a:hover {
-            color: var(--accent-orange);
+        .footer-links button:hover {
+            color: var(--accent);
         }
 
-        .footer-bottom {
-            max-width: 1400px;
-            margin: 40px auto 0;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-            color: rgba(255,255,255,0.5);
-            font-size: 14px;
+        .footer-copyright {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(36, 52, 59, 0.05);
+            font-size: 0.625rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5em;
+            color: rgba(36, 52, 59, 0.1);
         }
 
-        /* Responsive Design */
-        @media (max-width: 1199px) {
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
 
-            .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .mobile-menu-btn span {
+            width: 24px;
+            height: 2px;
+            background: var(--dark);
+            border-radius: 1px;
+            transition: all 0.3s;
         }
 
         @media (max-width: 768px) {
@@ -510,321 +1981,639 @@
                 display: none;
             }
 
-            .mobile-menu {
+            .mobile-menu-btn {
                 display: flex;
-            }
-
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-text h1 {
-                font-size: 38px;
-            }
-
-            .hero-image {
-                order: -1;
-            }
-
-            .hero-image img {
-                height: 350px;
-            }
-
-            .floating-badge {
-                left: 50%;
-                transform: translateX(-50%);
-                bottom: -25px;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            .about-image-wrapper {
-                order: -1;
-            }
-
-            .experience-card {
-                right: 20px;
-            }
-
-            .about-text {
-                text-align: center;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-text h1 {
-                font-size: 32px;
-            }
-
-            .hero-text p {
-                font-size: 17px;
-            }
-
-            .about-text h2,
-            .services h2,
-            .portfolio h2 {
-                font-size: 32px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav>
-            <a href="#" class="logo">Petra<span>Digital</span></a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact" class="btn">Get Started</a></li>
-            </ul>
-            <div class="mobile-menu">
+    <div class="bg-decor">
+        <div class="bg-decor-1"></div>
+        <div class="bg-decor-2"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <button class="logo-btn" onclick="setView('landing')">
+                <div class="logo-icon">
+                    <i data-lucide="box" style="width:20px;height:20px;"></i>
+                </div>
+                <span class="logo-text">Petra <span>Digital</span></span>
+            </button>
+            
+            <div class="nav-links">
+                <button class="nav-link" data-view="landing" onclick="setView('landing')">Home</button>
+                <button class="nav-link" data-view="portfolio" onclick="setView('portfolio')">Portfolio</button>
+                <button class="nav-link" data-view="contact" onclick="setView('contact')">Contact</button>
+                <button class="btn-primary" onclick="setView('contact')">Book a Call</button>
+                <button class="admin-btn" onclick="setView('admin')">
+                    <i data-lucide="settings" style="width:20px;height:20px;"></i>
+                </button>
+            </div>
+            <div class="mobile-menu-btn">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Building Your Brand on a Solid Foundation</h1>
-                <p>Full Service Branding, Web & Management</p>
-                <a href="#contact" class="btn">Start Your Project</a>
-            </div>
-            <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="Petra Digital Team">
-                <div class="floating-badge">150+ Satisfied Clients</div>
-            </div>
         </div>
-    </section>
+    </nav>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="about-content">
-            <div class="about-image-wrapper">
-                <div class="orange-l-shape"></div>
-                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=450&fit=crop" alt="About Petra Digital" class="about-image">
-                <div class="experience-card">
-                    <span>5+</span>
-                    <p>Years Experience</p>
+    <main id="app">
+        <!-- Landing View -->
+        <div id="landing-view" class="landing-view">
+            <section class="hero grid-bg">
+                <div class="hero-decor-1">
+                    <i data-lucide="ruler" style="width:120px;height:120px;color:var(--accent);opacity:0.5;"></i>
                 </div>
-            </div>
-            <div class="about-text">
-                <h2>We're Here to Build Your Brand</h2>
-                <p>At Petra Digital, we believe in transparency, strategic thinking, and scalable solutions that grow with your business. Our team combines creativity with data-driven insights to deliver results that matter.</p>
-                <ul class="values-list">
-                    <li>
-                        <div class="value-icon">T</div>
-                        <div class="value-text">
-                            <h3>Transparency</h3>
-                            <p>Clear communication and honest reporting at every step</p>
+                <div class="hero-decor-2">
+                    <i data-lucide="layers" style="width:120px;height:120px;color:var(--accent);opacity:0.5;"></i>
+                </div>
+
+                <div class="hero-badge">
+                    <i data-lucide="zap"></i>
+                    Structural Brand Systems
+                </div>
+                
+                <h1>Build your brand on a <br/><span class="italic">solid foundation.</span></h1>
+                
+                <p>We combine architectural precision with high-impact aesthetics to launch your identity in <span>10 days.</span></p>
+                
+                <div class="hero-btns">
+                    <button class="btn-primary" onclick="setView('contact')">
+                        Start Your Project <i data-lucide="arrow-right" style="width:22px;height:22px;"></i>
+                    </button>
+                    <button class="btn-secondary" onclick="setView('portfolio')">View Selection</button>
+                </div>
+            </section>
+
+            <!-- Featured Works -->
+            <section class="featured-works grid-bg">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <h2>Recent <span>Executions</span></h2>
+                        <p>Strategic collaborations that redefine visual standards within their niche.</p>
+                    </div>
+                    <button class="see-all-btn" onclick="setView('portfolio')">
+                        See All <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+                    </button>
+                </div>
+
+                <div class="project-grid">
+                    <div class="project-card" onclick="viewProject(0)">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&q=80&w=800" alt="Botanical Skincare Brand">
+                            <div class="project-img-overlay"></div>
                         </div>
-                    </li>
-                    <li>
-                        <div class="value-icon">S</div>
-                        <div class="value-text">
-                            <h3>Strategy-First</h3>
-                            <p>Data-driven strategies that align with your business goals</p>
+                        <div class="project-info">
+                            <span class="project-tag">Branding</span>
+                            <h3>Botanical Skincare Brand</h3>
+                            <div class="divider"></div>
                         </div>
-                    </li>
-                    <li>
-                        <div class="value-icon">B</div>
-                        <div class="value-text">
-                            <h3>Built to Scale</h3>
-                            <p>Solutions that grow with your business needs</p>
+                    </div>
+                    <div class="project-card offset" onclick="viewProject(1)">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="Nexus Tech Launch">
+                            <div class="project-img-overlay"></div>
                         </div>
-                    </li>
-                </ul>
+                        <div class="project-info">
+                            <span class="project-tag">B2B</span>
+                            <h3>Nexus Tech Launch</h3>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                    <div class="project-card" onclick="viewProject(2)">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800" alt="The Daily Grind">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-info">
+                            <span class="project-tag">Social Strategy</span>
+                            <h3>The Daily Grind</h3>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timeline Section -->
+            <section class="timeline grid-bg">
+                <div class="timeline-header">
+                    <h2>The 10-Day Sprint</h2>
+                    <p>Precision-engineered timeline to get your brand from zero to launched.</p>
+                </div>
+                <div class="timeline-items">
+                    <div class="timeline-item">
+                        <div class="timeline-day">DAY 01-03</div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-content">
+                            <h3>Blueprint & Analysis</h3>
+                            <p>Onboarding questionnaire followed by a strategic mood board to define your structural vision.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-day">DAY 04-06</div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-content">
+                            <h3>Asset Assembly</h3>
+                            <p>Drafting all visual components—from grid layouts to templates—ready for your first review.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-day">DAY 07-10</div>
+                        <div class="timeline-line"></div>
+                        <div class="timeline-content">
+                            <h3>Polishing & Handover</h3>
+                            <p>Final revisions, asset optimization, and delivery of your complete Brand Guide PDF.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i data-lucide="users" style="width:32px;height:32px;"></i>
+                    </div>
+                    <div class="stat-value">150+</div>
+                    <p class="stat-label">Happy Founders</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i data-lucide="zap" style="width:32px;height:32px;"></i>
+                    </div>
+                    <div class="stat-value">2.4x</div>
+                    <p class="stat-label">Faster Growth</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i data-lucide="shield-check" style="width:32px;height:32px;"></i>
+                    </div>
+                    <div class="stat-value">100%</div>
+                    <p class="stat-label">Consistency Rate</p>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <div class="cta-decor"></div>
+                <div class="cta-content">
+                    <h2>Ready to build?</h2>
+                    <p>Stop guessing and start converting with a brand foundation that holds weight.</p>
+                    <button class="btn-primary" onclick="setView('contact')">Get Started Now</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Portfolio View -->
+        <div id="portfolio-view" class="portfolio-view hidden">
+            <div class="portfolio-header">
+                <span class="portfolio-label">Case Library</span>
+                <h1 class="portfolio-title">Works <span>& Cases</span></h1>
+                <p class="portfolio-desc">A strategic curation of visual storytelling and identity systems designed for long-term growth.</p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item" onclick="viewProject(0)">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&q=80&w=1200" alt="Botanical Skincare Brand">
+                        <div class="portfolio-img-overlay"></div>
+                        <div class="portfolio-arrow">
+                            <div class="portfolio-arrow-btn">
+                                <i data-lucide="arrow-right" style="width:28px;height:28px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item-info">
+                        <span class="portfolio-item-label">01 // Branding & Canva Systems</span>
+                        <h3>Botanical Skincare Brand</h3>
+                    </div>
+                </div>
+                <div class="portfolio-item" onclick="viewProject(1)">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200" alt="Nexus Tech Launch">
+                        <div class="portfolio-img-overlay"></div>
+                        <div class="portfolio-arrow">
+                            <div class="portfolio-arrow-btn">
+                                <i data-lucide="arrow-right" style="width:28px;height:28px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item-info">
+                        <span class="portfolio-item-label">02 // B2B & Digital Design</span>
+                        <h3>Nexus Tech Launch</h3>
+                    </div>
+                </div>
+                <div class="portfolio-item" onclick="viewProject(2)">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1200" alt="The Daily Grind">
+                        <div class="portfolio-img-overlay"></div>
+                        <div class="portfolio-arrow">
+                            <div class="portfolio-arrow-btn">
+                                <i data-lucide="arrow-right" style="width:28px;height:28px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item-info">
+                        <span class="portfolio-item-label">03 // Social Strategy & Content</span>
+                        <h3>The Daily Grind</h3>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <h2>Our Services</h2>
-        <div class="services-grid">
-            <div class="service-card featured">
-                <h3>Our Expertise</h3>
-                <p>Comprehensive digital solutions tailored to your needs</p>
-            </div>
-            <div class="service-card">
-                <h3>Branding</h3>
-                <div class="pricing-item">
-                    <h4>Core Identity</h4>
-                    <div class="price">€350</div>
-                </div>
-                <div class="pricing-item">
-                    <h4>Market Authority</h4>
-                    <div class="price">€650</div>
+        <!-- Project Detail View -->
+        <div id="project-view" class="project-view hidden">
+            <div class="project-header">
+                <button class="back-btn" onclick="setView('portfolio')">
+                    <i data-lucide="arrow-left" style="width:16px;height:16px;"></i> Back to Library
+                </button>
+                
+                <div class="project-header-grid">
+                    <h1 class="project-title" id="project-title">Project Title</h1>
+                    <div class="project-meta">
+                        <div class="project-tags" id="project-tags"></div>
+                        <p class="project-quote" id="project-desc">Project description goes here.</p>
+                    </div>
                 </div>
             </div>
-            <div class="service-card">
-                <h3>Web Design</h3>
-                <div class="pricing-item">
-                    <h4>Digital Presence</h4>
-                    <div class="price">€850</div>
-                </div>
-                <div class="pricing-item">
-                    <h4>Growth Engine</h4>
-                    <div class="price">€1,350</div>
-                </div>
+
+            <div class="project-hero-img">
+                <img src="" id="project-hero-img" alt="">
             </div>
-            <div class="service-card">
-                <h3>Social Media</h3>
-                <div class="pricing-item">
-                    <h4>Steady Awareness</h4>
-                    <div class="price">€190/mo</div>
+
+            <div class="project-content">
+                <div class="project-content-grid">
+                    <div class="content-block">
+                        <h4>The Logic</h4>
+                        <p>We stripped the visual clutter to expose the brand's core essence.</p>
+                    </div>
+                    <div class="content-block">
+                        <h4 class="dark">Execution</h4>
+                        <p class="content-block-desc" id="project-content">Full analysis in progress.</p>
+                    </div>
                 </div>
-                <div class="pricing-item">
-                    <h4>Rapid Scale</h4>
-                    <div class="price">€390/mo</div>
-                </div>
+                
+                <div class="project-gallery" id="project-gallery"></div>
+            </div>
+
+            <div class="project-cta">
+                <h3>Like what <br/> you <span>see?</span></h3>
+                <button class="btn-primary" onclick="setView('contact')">Start Your Project</button>
             </div>
         </div>
-    </section>
 
-    <!-- Portfolio Section -->
-    <section class="portfolio" id="portfolio">
-        <h2>Our Work</h2>
-        <div class="portfolio-grid">
-            <div class="project-card">
-                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop" alt="Gosign Project" class="project-image">
-                <div class="project-info">
-                    <h3>Gosign</h3>
-                    <p>Brand Identity</p>
-                </div>
+        <!-- Contact View -->
+        <div id="contact-view" class="contact-view hidden">
+            <div class="contact-header">
+                <span class="contact-label">Project Brief</span>
+                <h1 class="contact-title">Let's build <br/> it <span>together.</span></h1>
+                <p class="contact-desc">Share your brand coordinates and we'll engineer the solution.</p>
             </div>
-            <div class="project-card">
-                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop" alt="Belvilla Project" class="project-image">
-                <div class="project-info">
-                    <h3>Belvilla</h3>
-                    <p>Web Design</p>
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Identity</label>
+                        <input type="text" class="form-input" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Coordinates</label>
+                        <input type="email" class="form-input" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group full">
+                        <label class="form-label">The Concept</label>
+                        <textarea class="form-input" rows="3" placeholder="Tell us about the project vision..." required></textarea>
+                    </div>
                 </div>
+                <button type="submit" class="submit-btn">
+                    Dispatch Inquiry <i data-lucide="arrow-right" style="width:22px;height:22px;"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- Admin View -->
+        <div id="admin-view" class="admin-view hidden">
+            <div class="admin-sidebar">
+                <button class="admin-sidebar-btn" id="admin-projects-btn" onclick="setAdminView('projects_list')">
+                    <i data-lucide="image" style="width:32px;height:32px;"></i>
+                </button>
+                <button class="admin-sidebar-btn" id="admin-logo-btn" onclick="setAdminView('logo')">
+                    <i data-lucide="layout" style="width:32px;height:32px;"></i>
+                </button>
             </div>
-            <div class="project-card">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop" alt="Opex Project" class="project-image">
-                <div class="project-info">
-                    <h3>Opex</h3>
-                    <p>Digital Marketing</p>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=300&fit=crop" alt="Pets Deli Project" class="project-image">
-                <div class="project-info">
-                    <h3>Pets Deli</h3>
-                    <p>Brand Strategy</p>
-                </div>
+
+            <div class="admin-content" id="admin-content">
+                <!-- Admin content will be dynamically rendered -->
             </div>
         </div>
-    </section>
+    </main>
 
-    <!-- Footer -->
-    <footer id="contact">
+    <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <a href="#" class="logo">Petra<span>Digital</span></a>
-                <p>We build brands that stand the test of time. Our team of experts is dedicated to helping your business grow through strategic digital solutions.</p>
+                <div class="footer-logo">
+                    <div class="footer-logo-icon">
+                        <i data-lucide="box" style="width:16px;height:16px;"></i>
+                    </div>
+                    <span class="footer-logo-text">Petra Digital</span>
+                </div>
+                <p class="footer-tagline">Solid Foundations Since 2023</p>
             </div>
-            <div class="footer-column">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Services</h4>
-                <ul>
-                    <li><a href="#">Branding</a></li>
-                    <li><a href="#">Web Design</a></li>
-                    <li><a href="#">Social Media</a></li>
-                    <li><a href="#">Digital Marketing</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Contact</h4>
-                <ul>
-                    <li><a href="mailto:hello@petradigital.com">hello@petradigital.com</a></li>
-                    <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
-                    <li><a href="#">123 Business Street</a></li>
-                    <li><a href="#">New York, NY 10001</a></li>
-                </ul>
+            <div class="footer-links">
+                <button onclick="setView('landing')">Framework</button>
+                <button onclick="setView('portfolio')">Manifesto</button>
+                <button onclick="setView('contact')">Contact</button>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Petra Digital. All rights reserved.</p>
+        <div class="footer-copyright">
+            Petra Digital &copy; 2024 — Engineering Clarity
         </div>
     </footer>
 
     <script>
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+        // Initialize Lucide icons
+        lucide.createIcons();
 
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
-            } else {
-                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
+        // Mock Project Data
+        const projects = [
+            { 
+                id: 1, 
+                title: 'Botanical Skincare Brand', 
+                description: 'A complete visual ecosystem for a premium organic skincare line.', 
+                tags: ['Branding', 'Canva Systems'], 
+                imageUrl: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&q=80&w=1200',
+                galleryUrls: [
+                    'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&q=80&w=800',
+                    'https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&q=80&w=800'
+                ],
+                content: 'We overhauled the digital storefront to match the physical product quality. By implementing a 10-day sprint, we moved from concept to a fully realized social kit that increased engagement by 40%.'
+            },
+            { 
+                id: 2, 
+                title: 'Nexus Tech Launch', 
+                description: 'Strategic B2B positioning and LinkedIn optimization for a SaaS startup.', 
+                tags: ['B2B', 'Digital Design'], 
+                imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200',
+                galleryUrls: [],
+                content: 'Professionalism meets innovation. We created a high-converting content system that allowed the founders to scale their outreach with total brand consistency.'
+            },
+            { 
+                id: 3, 
+                title: 'The Daily Grind', 
+                description: 'Refreshing a local staple for a new generation of digital natives.', 
+                tags: ['Social Strategy', 'Content'], 
+                imageUrl: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1200',
+                galleryUrls: [
+                    'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=800'
+                ],
+                content: 'A local cafe rebrand that focused on "Digital First" touchpoints. Custom highlight covers and grid layouts turned followers into regulars.'
             }
-        });
+        ];
 
-        // Add animation on scroll for cards
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        let currentView = 'landing';
+        let currentProject = null;
+        let adminView = 'projects_list';
+        let editingProject = null;
+        let formData = { title: '', description: '', content: '', tags: '', imageUrl: '', galleryUrls: [] };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        // Navigation
+        function setView(view) {
+            currentView = view;
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.view === view) {
+                    link.classList.add('active');
                 }
             });
-        }, observerOptions);
 
-        document.querySelectorAll('.service-card, .project-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
+            document.querySelectorAll('main > div').forEach(div => {
+                div.classList.add('hidden');
+            });
+
+            document.getElementById(view + '-view').classList.remove('hidden');
+            window.scrollTo(0, 0);
+            
+            lucide.createIcons();
+        }
+
+        // Project Detail
+        function viewProject(index) {
+            currentProject = projects[index];
+            document.getElementById('project-title').textContent = currentProject.title;
+            document.getElementById('project-desc').textContent = currentProject.description;
+            document.getElementById('project-content').textContent = currentProject.content;
+            document.getElementById('project-hero-img').src = currentProject.imageUrl;
+            
+            const tagsContainer = document.getElementById('project-tags');
+            tagsContainer.innerHTML = currentProject.tags.map(tag => 
+                `<span class="project-tag-badge">${tag}</span>`
+            ).join('');
+
+            const galleryContainer = document.getElementById('project-gallery');
+            if (currentProject.galleryUrls && currentProject.galleryUrls.length > 0) {
+                galleryContainer.innerHTML = currentProject.galleryUrls.map((url, i) => `
+                    <div class="gallery-item ${i === 0 ? 'full' : ''}">
+                        <img src="${url}" alt="">
+                    </div>
+                `).join('');
+            } else {
+                galleryContainer.innerHTML = '';
+            }
+
+            setView('project');
+        }
+
+        // Form Submit
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Sent!');
+        }
+
+        // Admin Functions
+        function setAdminView(view) {
+            adminView = view;
+            document.querySelectorAll('.admin-sidebar-btn').forEach(btn => btn.classList.remove('active'));
+            if (view === 'projects_list' || view === 'project_form') {
+                document.getElementById('admin-projects-btn').classList.add('active');
+            } else {
+                document.getElementById('admin-logo-btn').classList.add('active');
+            }
+            renderAdminContent();
+        }
+
+        function renderAdminContent() {
+            const content = document.getElementById('admin-content');
+            
+            if (adminView === 'projects_list') {
+                content.innerHTML = `
+                    <div class="admin-header">
+                        <div>
+                            <h1>Workspace</h1>
+                            <p>${projects.length} System Records</p>
+                        </div>
+                        <button class="admin-add-btn" onclick="setAdminView('project_form')">
+                            <i data-lucide="plus" style="width:22px;height:22px;"></i> New Module
+                        </button>
+                    </div>
+                    <div class="admin-grid">
+                        ${projects.map(p => `
+                            <div class="admin-project-card">
+                                <div class="admin-project-img">
+                                    <img src="${p.imageUrl}" alt="${p.title}">
+                                    <div class="admin-project-actions">
+                                        <button class="admin-action-btn" onclick="editProject(${p.id})">
+                                            <i data-lucide="edit-2" style="width:24px;height:24px;"></i>
+                                        </button>
+                                        <button class="admin-action-btn delete" onclick="deleteProject(${p.id})">
+                                            <i data-lucide="trash-2" style="width:24px;height:24px;"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="admin-project-info">
+                                    <h4>${p.title}</h4>
+                                    <p>${p.tags[0]}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (adminView === 'project_form') {
+                content.innerHTML = `
+                    <div class="admin-form">
+                        <div class="admin-form-header">
+                            <h2>${editingProject ? 'Modify System' : 'New System Module'}</h2>
+                            <button class="admin-form-discard" onclick="setAdminView('projects_list')">Discard Changes</button>
+                        </div>
+                        <form onsubmit="saveProject(event)">
+                            <div class="admin-form-grid">
+                                <div class="admin-form-group">
+                                    <label class="admin-form-label">Module Name</label>
+                                    <input type="text" class="admin-form-input" value="${formData.title || ''}" onchange="formData.title = this.value" required placeholder="Brand Identity">
+                                </div>
+                                <div class="admin-form-group">
+                                    <label class="admin-form-label">Tags</label>
+                                    <input type="text" class="admin-form-input" value="${formData.tags || ''}" onchange="formData.tags = this.value" placeholder="UI, UX, Branding">
+                                </div>
+                                <div class="admin-form-group full">
+                                    <label class="admin-form-label">Objective Summary</label>
+                                    <input type="text" class="admin-form-input" value="${formData.description || ''}" onchange="formData.description = this.value" required placeholder="Core project mission.">
+                                </div>
+                                <div class="admin-form-group full">
+                                    <label class="admin-form-label">Detailed Analysis</label>
+                                    <textarea class="admin-form-input" rows="6" onchange="formData.content = this.value" placeholder="Process and results breakdown...">${formData.content || ''}</textarea>
+                                </div>
+                                <div class="admin-form-group">
+                                    <label class="admin-form-label">Main Visual URL</label>
+                                    <input type="text" class="admin-form-input" value="${formData.imageUrl || ''}" onchange="formData.imageUrl = this.value" required>
+                                </div>
+                                <div class="admin-form-group">
+                                    <label class="admin-form-label">Extended Assets</label>
+                                    <div class="admin-gallery-upload">
+                                        <input type="file" multiple onchange="handleGalleryUpload(event)">
+                                        <div class="admin-gallery-upload-btn">
+                                            <i data-lucide="plus" style="width:24px;height:24px;"></i> Add Gallery
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            ${formData.galleryUrls.length > 0 ? `
+                                <div class="admin-gallery-preview">
+                                    ${formData.galleryUrls.map((u, i) => `
+                                        <div class="gallery-preview-item">
+                                            <img src="${u}" alt="">
+                                            <div class="gallery-preview-remove" onclick="removeGalleryImage(${i})">
+                                                <i data-lucide="x" style="width:24px;height:24px;color:white;"></i>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                            <div class="admin-form-actions">
+                                <button type="submit" class="admin-form-submit">Compile Changes</button>
+                                <button type="button" class="admin-form-cancel" onclick="setAdminView('projects_list')">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                `;
+            } else if (adminView === 'logo') {
+                content.innerHTML = `
+                    <div class="logo-upload">
+                        <h2>Core Identity Systems</h2>
+                        <div class="logo-upload-area">
+                            <input type="file" accept=".svg" onchange="handleLogoUpload(event)">
+                            <i data-lucide="upload" style="width:80px;height:80px;"></i>
+                            <p>Replace Brand Anchor (SVG Only)</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            lucide.createIcons();
+        }
+
+        function editProject(id) {
+            const project = projects.find(p => p.id === id);
+            editingProject = project;
+            formData = { ...project, tags: project.tags.join(', ') };
+            setAdminView('project_form');
+        }
+
+        function deleteProject(id) {
+            if (confirm('Delete?')) {
+                const index = projects.findIndex(p => p.id === id);
+                if (index > -1) {
+                    projects.splice(index, 1);
+                    renderAdminContent();
+                }
+            }
+        }
+
+        function saveProject(e) {
+            e.preventDefault();
+            const p = { 
+                ...formData, 
+                id: editingProject ? editingProject.id : Date.now(), 
+                tags: typeof formData.tags === 'string' ? formData.tags.split(',').map(t => t.trim()) : formData.tags,
+                galleryUrls: formData.galleryUrls
+            };
+            
+            if (editingProject) {
+                const index = projects.findIndex(x => x.id === editingProject.id);
+                projects[index] = p;
+            } else {
+                projects.unshift(p);
+            }
+            
+            setAdminView('projects_list');
+            editingProject = null;
+            formData = { title: '', description: '', content: '', tags: '', imageUrl: '', galleryUrls: [] };
+        }
+
+        function handleGalleryUpload(e) {
+            const files = Array.from(e.target.files);
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    formData.galleryUrls = [...formData.galleryUrls, ev.target.result];
+                    renderAdminContent();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function removeGalleryImage(index) {
+            formData.galleryUrls = formData.galleryUrls.filter((_, i) => i !== index);
+            renderAdminContent();
+        }
+
+        function handleLogoUpload(e) {
+            alert('Logo uploaded! (SVG files require server-side handling)');
+        }
+
+        // Initial render
+        renderAdminContent();
     </script>
 </body>
 </html>
