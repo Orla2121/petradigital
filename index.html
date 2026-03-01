@@ -2333,6 +2333,42 @@
     </footer>
 
     <script>
+        // Fallback mock data for when backend is not available
+        const fallbackProjects = [
+            { 
+                id: 1, 
+                title: 'Botanical Skincare Brand', 
+                description: 'A complete visual ecosystem for a premium organic skincare line.', 
+                tags: ['Branding', 'Canva Systems'], 
+                imageUrl: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&q=80&w=1200',
+                galleryUrls: [
+                    'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&q=80&w=800',
+                    'https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&q=80&w=800'
+                ],
+                content: 'We overhauled the digital storefront to match the physical product quality. By implementing a 10-day sprint, we moved from concept to a fully realized social kit that increased engagement by 40%.'
+            },
+            { 
+                id: 2, 
+                title: 'Nexus Tech Launch', 
+                description: 'Strategic B2B positioning and LinkedIn optimization for a SaaS startup.', 
+                tags: ['B2B', 'Digital Design'], 
+                imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200',
+                galleryUrls: [],
+                content: 'Professionalism meets innovation. We created a high-converting content system that allowed the founders to scale their outreach with total brand consistency.'
+            },
+            { 
+                id: 3, 
+                title: 'The Daily Grind', 
+                description: 'Refreshing a local staple for a new generation of digital natives.', 
+                tags: ['Social Strategy', 'Content'], 
+                imageUrl: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1200',
+                galleryUrls: [
+                    'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=800'
+                ],
+                content: 'A local cafe rebrand that focused on "Digital First" touchpoints. Custom highlight covers and grid layouts turned followers into regulars.'
+            }
+        ];
+
         // API Configuration - Change this to your backend URL
         const API_BASE = 'http://localhost:3000/api';
         
@@ -2347,6 +2383,7 @@
         let adminView = 'projects_list';
         let editingProject = null;
         let formData = { title: '', description: '', content: '', tags: '', imageUrl: '', galleryUrls: [] };
+        let isOfflineMode = false;
 
         // API Helper
         async function apiCall(endpoint, options = {}) {
@@ -2361,13 +2398,11 @@
                 const result = await response.json();
                 if (!result.success) {
                     console.error('API Error:', result.message);
-                    alert(result.message || 'An error occurred');
                     return null;
                 }
                 return result.data;
             } catch (error) {
-                console.error('Network Error:', error);
-                alert('Unable to connect to server. Make sure the backend is running.');
+                console.log('Running in offline mode - using local data');
                 return null;
             }
         }
@@ -2375,8 +2410,13 @@
         // Load initial data
         async function loadData() {
             const projectsData = await apiCall('/projects');
-            if (projectsData) {
+            if (projectsData && projectsData.length > 0) {
                 projects = projectsData;
+            } else {
+                // Use fallback data when API is not available
+                projects = [...fallbackProjects];
+                isOfflineMode = true;
+                console.log('Using offline mode with local data');
             }
             
             const logoData = await apiCall('/logo');
