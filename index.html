@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petra Digital | Full Service Branding, Web & Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-white: #FFFFFF;
+            --text-primary: #1A1A1A;
+            --text-secondary: #4A4A4A;
+            --accent-orange: #FF6B35;
+            --accent-hover: #E85A2A;
+            --card-border: #E5E5E5;
+            --section-bg: #FAFAFA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-white);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            z-index: 1000;
+            padding: 16px 5%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent-orange);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-orange);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--accent-orange);
+            color: var(--bg-white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 5% 100px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 24px;
+        }
+
+        .floating-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -30px;
+            background: var(--accent-orange);
+            color: var(--bg-white);
+            padding: 16px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.35);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 5%;
+            background: var(--section-bg);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 24px;
+        }
+
+        .orange-l-shape {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100px;
+            height: 100px;
+            border-top: 6px solid var(--accent-orange);
+            border-left: 6px solid var(--accent-orange);
+            border-radius: 24px 0 0 0;
+            z-index: -1;
+        }
+
+        .experience-card {
+            position: absolute;
+            bottom: -30px;
+            right: -20px;
+            background: var(--accent-orange);
+            color: var(--bg-white);
+            padding: 20px 32px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.35);
+        }
+
+        .experience-card span {
+            font-size: 32px;
+            font-weight: 700;
+            display: block;
+        }
+
+        .experience-card p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .about-text h2 {
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .about-text > p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .values-list {
+            list-style: none;
+        }
+
+        .values-list li {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .values-list li:last-child {
+            border-bottom: none;
+        }
+
+        .value-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-orange);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .value-text h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .value-text p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services h2 {
+            font-size: 42px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--bg-white);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+        }
+
+        .service-card.featured {
+            background: var(--accent-orange);
+            color: var(--bg-white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .service-card.featured h3 {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .service-card.featured p {
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+
+        .service-card:not(.featured) h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .pricing-item {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .pricing-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .pricing-item h4 {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .pricing-item .price {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent-orange);
+        }
+
+        .service-card:not(.featured) .pricing-item .price {
+            color: var(--accent-orange);
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 100px 5%;
+            background: var(--section-bg);
+        }
+
+        .portfolio h2 {
+            font-size: 42px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .project-info p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 5% 30px;
+            background: var(--text-primary);
+            color: var(--bg-white);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-brand .logo {
+            color: var(--bg-white);
+            font-size: 28px;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.7);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent-orange);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 40px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1199px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 38px;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .hero-image img {
+                height: 350px;
+            }
+
+            .floating-badge {
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: -25px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image-wrapper {
+                order: -1;
+            }
+
+            .experience-card {
+                right: 20px;
+            }
+
+            .about-text {
+                text-align: center;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 32px;
+            }
+
+            .hero-text p {
+                font-size: 17px;
+            }
+
+            .about-text h2,
+            .services h2,
+            .portfolio h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Petra<span>Digital</span></a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact" class="btn">Get Started</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Building Your Brand on a Solid Foundation</h1>
+                <p>Full Service Branding, Web & Management</p>
+                <a href="#contact" class="btn">Start Your Project</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="Petra Digital Team">
+                <div class="floating-badge">150+ Satisfied Clients</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <div class="about-image-wrapper">
+                <div class="orange-l-shape"></div>
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=450&fit=crop" alt="About Petra Digital" class="about-image">
+                <div class="experience-card">
+                    <span>5+</span>
+                    <p>Years Experience</p>
+                </div>
+            </div>
+            <div class="about-text">
+                <h2>We're Here to Build Your Brand</h2>
+                <p>At Petra Digital, we believe in transparency, strategic thinking, and scalable solutions that grow with your business. Our team combines creativity with data-driven insights to deliver results that matter.</p>
+                <ul class="values-list">
+                    <li>
+                        <div class="value-icon">T</div>
+                        <div class="value-text">
+                            <h3>Transparency</h3>
+                            <p>Clear communication and honest reporting at every step</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="value-icon">S</div>
+                        <div class="value-text">
+                            <h3>Strategy-First</h3>
+                            <p>Data-driven strategies that align with your business goals</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="value-icon">B</div>
+                        <div class="value-text">
+                            <h3>Built to Scale</h3>
+                            <p>Solutions that grow with your business needs</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2>Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card featured">
+                <h3>Our Expertise</h3>
+                <p>Comprehensive digital solutions tailored to your needs</p>
+            </div>
+            <div class="service-card">
+                <h3>Branding</h3>
+                <div class="pricing-item">
+                    <h4>Core Identity</h4>
+                    <div class="price">€350</div>
+                </div>
+                <div class="pricing-item">
+                    <h4>Market Authority</h4>
+                    <div class="price">€650</div>
+                </div>
+            </div>
+            <div class="service-card">
+                <h3>Web Design</h3>
+                <div class="pricing-item">
+                    <h4>Digital Presence</h4>
+                    <div class="price">€850</div>
+                </div>
+                <div class="pricing-item">
+                    <h4>Growth Engine</h4>
+                    <div class="price">€1,350</div>
+                </div>
+            </div>
+            <div class="service-card">
+                <h3>Social Media</h3>
+                <div class="pricing-item">
+                    <h4>Steady Awareness</h4>
+                    <div class="price">€190/mo</div>
+                </div>
+                <div class="pricing-item">
+                    <h4>Rapid Scale</h4>
+                    <div class="price">€390/mo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <h2>Our Work</h2>
+        <div class="portfolio-grid">
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop" alt="Gosign Project" class="project-image">
+                <div class="project-info">
+                    <h3>Gosign</h3>
+                    <p>Brand Identity</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop" alt="Belvilla Project" class="project-image">
+                <div class="project-info">
+                    <h3>Belvilla</h3>
+                    <p>Web Design</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop" alt="Opex Project" class="project-image">
+                <div class="project-info">
+                    <h3>Opex</h3>
+                    <p>Digital Marketing</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=300&fit=crop" alt="Pets Deli Project" class="project-image">
+                <div class="project-info">
+                    <h3>Pets Deli</h3>
+                    <p>Brand Strategy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo">Petra<span>Digital</span></a>
+                <p>We build brands that stand the test of time. Our team of experts is dedicated to helping your business grow through strategic digital solutions.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Branding</a></li>
+                    <li><a href="#">Web Design</a></li>
+                    <li><a href="#">Social Media</a></li>
+                    <li><a href="#">Digital Marketing</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:hello@petradigital.com">hello@petradigital.com</a></li>
+                    <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+                    <li><a href="#">123 Business Street</a></li>
+                    <li><a href="#">New York, NY 10001</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Petra Digital. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
+            }
+        });
+
+        // Add animation on scroll for cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .project-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
