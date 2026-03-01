@@ -2710,7 +2710,7 @@
         async function deleteProject(id) {
             if (!confirm('Delete this project?')) return;
             
-            const result = await apiCall(`/projects/${id}`, { method: 'DELETE' });
+            const result = await deleteProjectFromSupabase(id);
             if (result !== null) {
                 projects = projects.filter(p => p.id !== id);
                 renderFeaturedWorks();
@@ -2731,18 +2731,8 @@
                 galleryUrls: formData.galleryUrls || []
             };
 
-            let result;
-            if (editingProject) {
-                result = await apiCall(`/projects/${editingProject.id}`, {
-                    method: 'PUT',
-                    body: JSON.stringify(projectData)
-                });
-            } else {
-                result = await apiCall('/projects', {
-                    method: 'POST',
-                    body: JSON.stringify(projectData)
-                });
-            }
+            const isNew = !editingProject;
+            const result = await saveProjectToSupabase(projectData, isNew);
 
             if (result) {
                 await loadData();
